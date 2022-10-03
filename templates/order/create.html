@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <div class="col-12">
+    <form class="mt-4 row text-light" method="POST" action="{% url 'order:pay' %}">
+        {% csrf_token %}
+        <div class="form-group p-0">
+            
+            <div class="alert main_css h4 " role="alert">
+                  <div class="mt-1 mb-2">
+                        <label for="select-address" class="mb-2">Address</label>
+                        <select name="address" id="select-address" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            
+                              {% for address in addresses %}
+                                  <option value="{{address.id}}">{{address.address}}</option>
+                              {% endfor %}
+                        </select>
+                  </div>
+                  <div class="d-flex justify-content-center ">
+        						Don't have an addrress?<a href="{% url 'account:address-register' %}" class="text-warning">Register it</a>
+        					</div>
+                  <div class="mt-1 mb-2">
+                      <p class='h3 text-light'> You will pay a total of <strong class="custom-tet">{{total}}</strong> </p>
+                  </div>
+                  <div class="alert alert-danger">
+                    <p> NOTE:  when you click in Pay, if the itens in cart are higher than the stock in the store the transaction will be canceld and you will be redirected to cart</p>
+                  </div>
+                  <div class="row">
+                      <button type="submit" class="btn btn-lg custom_button mt-4 custom-text"> Submit</button>
+                  </div>
+            </div>
+        </div>   
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{
+  "files": {
+    "account/views.py": [
+      {
+        "id": "175b9450-1480-419b-951a-142a3d692679",
+        "line": 205,
+        "version": 5490,
+        "index": 7376
+      }
+    ],
+    "cart/cart.py": [
+      {
+        "id": "0199d634-7dbb-4d51-8c5b-ddcc6c878937",
+        "line": 7,
+        "version": 2926,
+        "index": 138
+      }
+    ],
+    "cart/views.py": [
+      {
+        "id": "9ada7767-8c5f-48c0-be55-8d14ff0d4e17",
+        "line": 13,
+        "version": 3477,
+        "index": 322
+      }
+    ],
+    "product/views.py": [
+      {
+        "id": "46a9ccc8-80be-4b71-8909-a4795ab88784",
+        "line": 117,
+        "version": 1419,
+        "index": 3887
+      }
+    ]
+  }
+}

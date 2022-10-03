@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+
+{% block title%} {% endblock %}
+{% block content %}
+
+
+<div class="col-12 h4 alert alert-danger text-center" role="alert">
+    <a class="text-danger" href="{% url 'account:address' %}">Configure your Addresses</a>
+</div>
+
+<div class="col-12">
+      {% if message %}
+      <div class=" alert alert-info m-0" role="alert">
+          <h1> {{total}}</h1>
+      </div>
+    {% endif %}
+  
+</div>
+<div class="col-12 h4 p-0">
+    <h1 class="pt-3 pb-3 text-center bg-dark rounded"><a class="text-light" href="{% url 'account:update'%}">Change Password</a></h1>
+    <h1 class="text_color_h1 pt-3 pb-3 text-center bg-dark rounded">Orders:</h1>
+    {% for order in orders %}       
+      <div class="alert h3 main_css text-light" role="alert">
+          <a class="text-light" href="{% url 'order:order_info' order.id %}"> See Itens in Order</a>
+          <p class="mt-4">Order  : {{order.id}}</p>
+          <p>State: {{order.address.state}} </p>
+          <p>City: {{order.address.city}} </p>
+          <p>Address: {{order.address.address}} </p>
+          <p>Number: {{order.address.number}} </p>
+          <p>Total Paid: {{order.total_paid}}</p>
+          
+      </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

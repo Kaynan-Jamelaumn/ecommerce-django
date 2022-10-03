@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-12">
+  <form class="mt-4 row text-light" action="{% url 'account:login' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+          {% if message %}
+              <div class="alert alert-danger" role="Alert">
+                <h3>{{message}}</h3>
+              </div>
+          {% endif %}
+          <div class="main_css h4 alert" role="alert">
+              <div class="mt-1 mb-1 col-12">
+                <label for="email" class="mb-2">E-mail or Username</label>
+                <input type="text" class="form-control" id="email" placeholder="E-mail" name="email"></input>
+              </div>
+            
+              <div  class="mt-1 mb-1 col-12">
+                <label for="password" class="mb-2">Password</label>
+                <input type="password" class="form-control col-4"  id="password" placeholder="Password" name="password"></input>
+              </div>
+              <div class="row">
+                  <button type="submit" class="btn btn-lg custom_button mt-4 custom-text"> Submit</button>
+              </div>
+              <div class="mt-1 col-12">
+      					<div class="d-flex justify-content-center ">
+      						Don't have an account?<a href="{% url 'account:register' %}" class="text-warning"Sign Up</a>
+      					</div>
+  				    </div>
+            
+          </div>
+      </div>
+    
+  </form>
+</div>
+
+{% endblock%}

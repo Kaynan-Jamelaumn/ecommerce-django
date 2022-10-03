@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="col-12">
+  <form class="mt-4 row text-light" action="{% url 'account:register' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+          <div class="main_css h4 alert" role="alert">
+                {% if message %}
+                    <div class="alert alert-danger" role="Alert">
+                      {{message}}
+                    </div>
+                {% endif %}
+                <div class="mt-1 mb-1">
+                <label for="name" class="mb-2">Name </label>
+                <input type="text" class="form-control" id="name" placeholder="Name " name="name"></input>
+              </div>
+              <div class="mt-1 mb-1">
+                <label for="email" class="mb-2">E-mail </label>
+                <input type="text" class="form-control" id="email" placeholder="E-mail" name="email"></input>
+              </div>
+            
+              <div  class="mt-1 mb-1">
+                <label for="password" class="mb-2">Password</label>
+                <input type="password" class="form-control col-4"  id="password" placeholder="Password" name="password"></input>
+              </div>
+
+              <div  class="mt-1 mb-1">
+                <label for="password_confirmation" class="mb-2">Password Confirmation</label>
+                <input type="password" class="form-control col-4"  id="password_confirmation" placeholder="Password Confirmation" name="password_confirmation"></input>
+              </div>
+            
+              <div class="row">
+                  <button type="submit" class="btn btn-lg custom_button mt-4 custom-text"> Submit</button>
+              </div>
+
+              <div class="mt-1">
+      					<div class="d-flex justify-content-center ">
+      						Already have an account?<a href="{% url 'account:login' %}" class="text-warning">Login</a>
+      					</div>
+  				    </div>
+              <ul class="list-group mt-3">
+                  <li class="list-group-item list-group-item-success">Note: Password Needs at least 1 Letter,1 Case Sensistive Letter and 1 Number, Index higher than 7</li>
+              
+                
+              </ul>
+          </div>
+      </div>
+
+        
+  </form>
+</div>
+{% endblock%}

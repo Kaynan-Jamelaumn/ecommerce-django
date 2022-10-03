@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+    {%block title%}{{category.name}}
+    {%endblock%}
+
+
+
+
+{%block content %}
+<div class="col-12">
+  <nav class="alert mynav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a class="custom-text h4" href="{% url 'product:index'%}">Home</a></li>
+      <li class="breadcrumb-item active text-light h4" aria-current="page">{{category.name}}</li>
+    </ol>
+  </nav>
+</div>
+
+      <div class="row">
+      {% for product in products %}
+        <div class="col-sm-12 col-md-4">
+            <div class="mynav text-center rounded-top m-0 pb-2">
+                
+                <a class="h1 custom-text text-decoration-none" href="{% url 'product:detail' product.slug %}">{{product.name}}</a>
+            </div>
+            <div class="main_css alert text-light" >
+                 <!--...
+                <a class="h4 mt-2" href="{{product.get_absolute_url}}">{{product.name}}</a>
+                --> 
+                {% if product.image %}
+                    <img src="{{product.image.url}}" class="img-fluid" alt="{{product.image.url}}">
+                {% endif %}
+                {% for variation in product.productvariation_set.all %}
+                    {% if variation.product.id == product.id %}
+                                                
+                          {% if forloop.first %}
+                              
+                              {% if product.on_promotion == True %}
+                                  {% if variation.on_promotion == True %}
+                                      {% if variation.promotion_price %}
+                                        <p class="h5 mt-2">{{variation.price}}</p>
+                                        <p class="h5 mt-2">{{variation.promotion_price}}</p>
+                                      {% else %}
+                                        <p class="h5 mt-2">{{variation.price}}</p>
+                                      {% endif %}
+                                  {% else %}
+                                        <p class="h5 mt-2">{{variation.price}}</p>
+                                  {% endif %}
+                              {% else %}
+                                  <p class="h5 mt-2">{{variation.price}}</p>
+                              {% endif %}
+                              <p  class="h5 mt-2">Description: {{variation.short_description}}</p>
+                              {% if variation.stock >= 1 %}
+                                <div class="row">
+                                    <button type="submit" class="btn btn-lg custom_button mt-4 "><a class="custom-text text-decoration-none" href="{% url 'product:detail' product.slug%}">Select Product Variations to buy</a></button>
+                                </div>
+                                <div class="row">
+                                    <button type="submit" data-variation_id="{{variation.id}}" class="add_to_cart_button btn btn-lg custom_button mt-4 custom-text">Add to Cart</button>
+                                </div>
+                              {% else %}
+                                  <p class="h5 mt-2">out of stock</p>
+                              {% endif %}
+                          {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+      {% endfor %}
+      
+      {% include 'partials/_paginator.html' %}
+      </div>
+
+
+
+<script>
+  
+
+
+
+$( ".add_to_cart_button" ).click(function(e) {
+  e.preventDefault();
+  let variation_id = $(this).data("variation_id");
+  $.ajax({
+    type: "POST",
+    url: '{% url "cart:add" %}',
+    data: {
+        variationid: variation_id,
+        productquantity: 1,
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: 'cart_add'
+    },
+    success: (json) => {
+      console.log(json)}
+      
+       //document.getElementById("cart-quantity").innerHTML = json.quantity}
+      /*,
+    error: function (xhr, errmsg, err) {
+        console.log(xhr,errmsg,err)
+    }*/
+  });
+
+})
+  </script>
+{%endblock%}

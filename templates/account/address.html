@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}a
+{% endblock %}
+
+{% block content %}
+<div class="col-12">
+  <div class="row">
+      <button type="submit" class="btn btn-lg custom_button mt-4 "> <a class="custom-text h4 text-decoration-none" href="{% url 'account:address-register' %}">Register an Address</a></button>
+  </div>
+  <div class="row mt-3 h4 text-light"> 
+    {% for address_object in addresses %}
+    <div class="alert main_css" role="alert">
+        <p>State: {{address_object.state}}</p>
+        <p>City: {{address_object.city}}</p>
+        <p>Postcode: {{address_object.post_code}}</p>
+        <p>Address: {{address_object.address}}</p>
+        <p>Number: {{address_object.number}}</p>
+        <button type="button" class="btn btn-lg custom_button mt-4"><a class="custom-text text-decoration-none" href="{% url 'account:address_delete' address_object.id %}">Delete Address</a></button>
+
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

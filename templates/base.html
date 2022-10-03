@@ -1,0 +1,27 @@
+
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% include 'partials/_head.html' %}
+        <title>{% block title%}{%endblock%}</title>
+    </head>
+    <body class="container p-0">
+          {% include 'partials/_scripts.html' %}
+      <nav class="mt-1 mb-0">
+          <div class="row">
+              {% include 'partials/_nav.html'%}
+          </div>
+      </nav>
+      <main>
+          <div class="row">
+         {%block content%}{%endblock%}
+          </div>
+      </main>
+      <footer>
+      </footer>
+
+    </body>
+
+</html>

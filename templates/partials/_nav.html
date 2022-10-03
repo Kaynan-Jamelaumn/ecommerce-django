@@ -1,0 +1,50 @@
+<div class="col-12">
+  <form  method="get" action="{% url 'product:search' %}">
+    <h1 class="text_color_h1  alert alert-success text-center">Ecommerce - Project</h1>
+    <div class="mynav alert alert-success" role="alert">
+        <div class="row pb-1">    
+          <div class="col-sm-12 mt-3 mb-2 col-md-4">
+              <div class="form-group">
+                   <input class="form-control" type="search" value="{{ request.GET.result }}" id="search-input"
+              placeholder="Research" name="result">
+              </div>
+          </div>
+          <div class='col-sm-12 col-md-8'> 
+              <div class="row">
+                {% if user.is_authenticated %}
+                    <div class="col-sm-12 mt-3 col-md-3 text-center">
+                        <a  class="h3 custom-text-light text-decoration-none" href="{% url 'product:index' %}">Home</a>
+                        <i class="fa-solid fa-house h5 custom-text"></i>
+                    </div>
+                    <div class="col-sm-12 mt-3 col-md-3 text-center">
+                        <a class="h3 custom-text-light text-decoration-none" href="{% url 'account:logout' %}">logout</a>
+                        <i class="fa-solid fa-right-from-bracket h5 custom-text"></i>
+                    </div>
+                    <div class="col-sm-12 mt-3 col-md-4 text-center">
+                        <a class="h3 custom-text-light text-decoration-none" href="{% url 'account:dashboard' %}">Dashboard</a>
+                        <i class="fa-solid fa-keyboard h5 custom-text"></i>
+                    </div>
+                    <div class="col-sm-12 mt-3 col-md-2 text-center">
+                        <a class="h3 custom-text-light text-decoration-none" href="{% url 'cart:view' %}">Cart</a>
+                        <i class="fa-solid fa-cart-shopping h5 custom-text"></i>
+                    </div>
+                {% else %}  
+                    <div class="col-sm-12 mt-3 col-md-4 text-center">
+                        <a  class="h3 custom-text-light text-decoration-none" href="{% url 'product:index' %}">Home</a>
+                        <i class="fa-solid fa-house h5 custom-text"></i>
+                    </div>
+                    <div class="col-sm-12 mt-3 col-md-4 text-center ">
+                        <a class="h3 custom-text-light text-decoration-none" href="{% url 'account:login' %}">Login</a>
+                        <i class="fa-solid fa-user h5 custom-text"></i>
+                    </div>
+                    <div class="col-sm-12 mt-3 col-md-4 text-center">
+                        <a  class="h3 custom-text-light text-decoration-none" href="{% url 'account:register' %}">Sign Up</a>
+                        <i class="fa-solid fa-user-plus h5 custom-text"></i>
+                    </div>
+                {% endif %}
+              </div>
+          </div>
+        </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}a
+{% endblock %}
+
+{% block content %}
+<div class="col-12">
+  <form class="mt-4 row text-light" method="POST" action="{% url 'account:address-register' %}">
+      <div class="form-group p-0">
+          {% csrf_token %}
+          <div class="alert main_css h4 " role="alert">
+                <div class="mt-1 mb-2">
+                      <label for="address" class="mb-2">Address</label>
+                      <input type="text" class="form-control" id="address" placeholder="Address" name="address"></input>
+                </div>
+                <div class="mt-1 mb-2">
+                      <label for="number" class="mb-2">Number</label>
+                      <input type="text" class="form-control" id="number" placeholder="Number" name="number"></input>
+                </div>
+                <div class="mt-1 mb-2">
+                      <label for="postcode" class="mb-2">PostCode</label>
+                      <input type="text" class="form-control" id="postcode" placeholder="PostCode" name="postcode"></input>
+                </div>
+                <div class="mt-1 mb-2">
+                      <label for="select-state" class="mb-2">State</label>
+                      <select name="state" id="select-state" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            {% for state in states%}
+                                <option value="{{state}}">{{state}}</option>
+                            {% endfor %}
+                      </select>
+                </div>
+                <div class="mt-1 mb-2">
+                       <label for="city" class="mb-2">Cities</label>
+                      <select name="city" id="city" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">                                 {% if acre %}
+                                {% for city in acre %}
+                                <option value="{{city}}">{{city}}</option>
+                                {% endfor %}
+                            {% else %}
+                            {% for city in cities%}
+                                <option value="{{city}}">{{city}}</option>
+                            {% endfor %}
+                            {% endif %}
+                      </select>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-lg custom_button mt-4 custom-text"> Submit</button>
+                </div>
+          </div>
+      </div>   
+  </form>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+  
+
+ $('#select-state').on('change', function (e) {
+        console.log('aaaaaa')
+        e.preventDefault();
+        let state_selected = document.getElementById("select-state").value
+
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'account:state_on_change' %}",
+            data: {
+                state_selected: state_selected,
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'state_on_change'
+            },
+            success: function (json) {
+                console.log(json.cities_in_state);
+                let cidade = json.cities_in_state;
+                $('#city').empty()
+                $.each(cidade, function (i, cidade) {
+
+                    $('#city').append($('<option>', {
+                        value: cidade,
+                        text: cidade
+                    }));
+
+                });
+            },
+            error: function (xhr, errmsg, err) { }
+        });
+    });
+</script>
+{% endblock %}

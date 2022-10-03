@@ -1,0 +1,35 @@
+"
+            password_letters = []
+            for letter_password in range(0, password_length):
+                password_letters.append(password[letter_password])
+            has_letter = [ letter for letter in letters if letter in password_letters]
+
+            if len(password) <7:
+              return  HttpResponse('passwords too short')
+
+            letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+            password_length = len(password)
+
+            letter_password = [ password[index] for index in range(0, password_length)]
+    
+            has_letter = [ letter for letter in letters if letter in letter_password]
+            if not has_letter:
+              return HttpResponse('without letter lower ')
+          
+            letters = [ letter.upper() for letter in letters]
+            has_case_sensitive_letter =[ letter for letter in letters if letter in letter_password]
+            if not has_case_sensitive_letter:
+                return HttpResponse('without letter upper ')
+            numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+            has_number = [ letter for letter in numbers if letter in letter_password]
+            
+            if not password == password_confirmation:
+                return  HttpResponse('passwords doesnt match')
+            if not User.objects.filter(email=email):
+                user = User.objects.create_user(username=name,email=email,password=password)   
+                user.save()  
+                return render(request, 'account/dashboard.html')
+            else:  HttpResponse('e-mail already registred')
+ """
+  

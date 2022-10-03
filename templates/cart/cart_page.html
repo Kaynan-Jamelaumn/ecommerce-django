@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="col-12">
+    {% if total %}
+        <div class="row">
+          <button class="btn btn-lg custom_button mb-3"><a class="custom-text text-decoration-none" href="{% url 'order:pay' %}">Pay</a></button>
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class=" alert alert-info m-0" role="alert">
+          
+      <h1>You will Pay a total of: {{total}}</h1>
+        </div>
+    </div>
+    {% for index_of in integerid %}
+        <div class="row">
+          <div class="alert h3 main_css text-light" role="alert">
+              {% for field in other_fields %}        
+                    {% if forloop.counter == forloop.parentloop.counter %}
+                            <p class="mt-4">Quantity: {{field.quantity}}</p>
+                            <p class="mt-4">Price: {{field.price_or_promotion_price}}</p>
+                            <p class="mt-4">Total: {{field.totalitem}}</p>
+                     {% endif %}
+              {% endfor%}
+              {% for  integerid in integerid %}
+                  {% if forloop.counter == forloop.parentloop.counter %}
+                      <p class="mt-4">ID: {{integerid}}</p>
+                      {% for variation in variations %}
+                            {% if integerid == variation.id %} 
+                               <p>Detail Item: <a class="custom-text text-decoration-none" href="{% url 'product:detail' variation.product.slug %}">{{ variation.name }}</a></p
+                               <row>                                                 
+                                    <button type="button" class="btn btn-lg custom_button mt-4"><a class="custom-text text-decoration-none" href="{% url 'cart:remove' variation.id %}">Remove Item</a></button>
+                               </row>      
+                            {% endif %}
+                      {% endfor %}
+                  {%endif%}
+              {% endfor %}
+                       
+          </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

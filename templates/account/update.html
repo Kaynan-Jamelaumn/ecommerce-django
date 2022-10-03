@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-12">
+  <form class="mt-4 row text-light" action="{% url 'account:update' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+          <div class="main_css h4 alert" role="alert">
+              {% if message %}
+                  <div class="alert alert-danger" role="Alert">
+                    <h3>{{message}}</h3>
+                  </div>
+              {% endif %}
+              <div class="mt-1 mb-1 col-12">
+                <label for="password" class="mb-2">Password</label>
+                <input type="password" class="form-control col-4"  id="password" placeholder="Password" name="password"></input>
+              </div>
+        
+              <div class="mt-1 mb-1 col-12">
+                <label for="password" class="mb-2">Password Confirmation</label>
+                <input type="password_confirmation" class="form-control col-4"  id="password_confirmation" placeholder="Password Confirmation" name="password_confirmation"></input>
+              </div>
+
+        
+              <div class="row">
+                  <button type="submit" class="btn btn-lg custom_button mt-4 custom-text"> Submit</button>
+              </div>         
+          </div>
+      </div>
+    
+  </form>
+</div>
+{% endblock %}

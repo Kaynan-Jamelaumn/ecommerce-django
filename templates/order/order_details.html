@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="col-12">
+  {% for order in orders.order.all %}
+  <div class="main_css h4 alert text-light" role="alert">
+      <a class="text-light" href="{% url 'product:detail' order.variation.product.slug %}"> See Product Detail</a>
+      <p class='mt-4'>Order ID: {{order.id}}</p>
+      <p>Product Name: {{order.variation.name}} </p>
+      <p>Product Price: {{order.variation.price}} </p>
+      <p>Product Quantity: {{order.quantity}}</p>
+      <p>Product Description: {{order.variation.short_description}} </p>
+      <p>Total: {{order.total}}</p>
+  </div>
+  {% endfor %}
+  
+    
+
+</div>
+
+{% endblock %}
