@@ -13,7 +13,7 @@ def password_validator(password, password_confirmation):
 
     has_letter = [letter for letter in letters if letter in letter_password]
     if not has_letter:
-        the_message = "Has no not case sensitive letter"
+        the_message = "Has no letter that is not case sensitive"
         return the_message, False
 
     letters = [letter.upper() for letter in letters]

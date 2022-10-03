@@ -13,6 +13,8 @@ from .models import Address  #Address Address_register Address_delete
 
 from order.models import Orders
 
+import re  #i  dont know regex
+
 
 # Create your views here.
 def user_login(request):
@@ -62,6 +64,10 @@ def register(request):
             is_password_valid = password_validator(
                 password, password_confirmation)  #Validator
             if is_password_valid == True:
+                pat = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
+                if not re.match(pat, email):
+                    return render(request, 'account/register.html',
+                                  {'message': 'e-mail is invalid'})
                 if not User.objects.filter(
                         email=email) and not User.objects.filter(
                             username=name):

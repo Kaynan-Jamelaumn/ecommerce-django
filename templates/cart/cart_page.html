@@ -7,13 +7,20 @@
         <div class="row">
           <button class="btn btn-lg custom_button mb-3"><a class="custom-text text-decoration-none" href="{% url 'order:pay' %}">Pay</a></button>
         </div>
-    {% endif %}
-    <div class="row">
-        <div class=" alert alert-info m-0" role="alert">
-          
-      <h1>You will Pay a total of: {{total}}</h1>
+        <div class="row">
+          <div class=" alert alert-info m-0" role="alert">
+
+            <h1>Your total: {{total}}</h1>
+          </div>
         </div>
-    </div>
+    {% else %}
+      <div class="row">
+          <div class=" alert alert-warning m-0 text-center" role="alert">
+
+            <h1>No itens in cart</h1>
+          </div>
+        </div>
+    {% endif %}
     {% for index_of in integerid %}
         <div class="row">
           <div class="alert h3 main_css text-light" role="alert">

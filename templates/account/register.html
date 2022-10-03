@@ -11,6 +11,11 @@
                       {{message}}
                     </div>
                 {% endif %}
+                <ul class="list-group mt-3">
+                    <li class="list-group-item list-group-item-success">Note: Password Needs at least 1 Letter,1 Case Sensistive Letter and 1 Number, Index higher than 7</li>
+                
+                  
+                </ul>
                 <div class="mt-1 mb-1">
                 <label for="name" class="mb-2">Name </label>
                 <input type="text" class="form-control" id="name" placeholder="Name " name="name"></input>
@@ -39,11 +44,6 @@
       						Already have an account?<a href="{% url 'account:login' %}" class="text-warning">Login</a>
       					</div>
   				    </div>
-              <ul class="list-group mt-3">
-                  <li class="list-group-item list-group-item-success">Note: Password Needs at least 1 Letter,1 Case Sensistive Letter and 1 Number, Index higher than 7</li>
-              
-                
-              </ul>
           </div>
       </div>
 
