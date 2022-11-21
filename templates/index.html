@@ -46,18 +46,25 @@
                               {% if product.on_promotion == True %}
                                   {% if variation.on_promotion == True %}
                                       {% if variation.promotion_price %}
-                                        <p class="h5 mt-2">{{variation.price}}</p>
-                                        <p class="h5 mt-2">{{variation.promotion_price}}</p>
+                                        <p class="h5 mt-2"> Original Price: {{variation.price}}</p>
+                                        <p class="h5 mt-2"> Current price in promotion: {{variation.promotion_price}}</p>
                                       {% else %}
-                                        <p class="h5 mt-2">{{variation.price}}</p>
+                                        <p class="h5 mt-2"> Price: {{variation.price}}</p>
                                       {% endif %}
                                   {% else %}
-                                        <p class="h5 mt-2">{{variation.price}}</p>
+                                        <p class="h5 mt-2"> Price: {{variation.price}}</p>
                                   {% endif %}
                               {% else %}
-                                  <p class="h5 mt-2">{{variation.price}}</p>
+                                  <p class="h5 mt-2">Price :{{variation.price}}</p>
                               {% endif %}
-                              <p  class="h5 mt-2">Description: {{variation.short_description}}</p>
+                              <p  class="h5 mt-2">Description: 
+                                {% if not variation.short_description %}
+                                No description available
+                                {% else %}
+                                {{variation.short_description}}
+                                {% endif %}
+                                
+                              </p>
                               <div class="row">
                                   <button type="submit" class="btn btn-lg custom_button mt-4 "><a class="custom-text text-decoration-none" href="{% url 'product:detail' product.slug%}">Select Product Variations to buy</a></button>
                               </div>
@@ -66,7 +73,7 @@
                                     <button type="submit" data-variation_id="{{variation.id}}" class="add_to_cart_button btn btn-lg custom_button mt-4 custom-text">Add to Cart</button>
                                 </div>
                               {% else %}
-                                  <p class="h5 mt-2">out of stock</p>
+                                  <p class="h5 mt-2"> this product is out of stock, check if the other variatios are still in stock</p>
                               {% endif %}
                           {% endif %}
                     {% endif %}
