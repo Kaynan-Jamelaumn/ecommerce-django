@@ -22,6 +22,8 @@ class Cart:
                                       id=variation_id)
         if variation.stock <= int(quantity):
             quantity = variation.stock
+        if quantity <= 0: 
+            return 
         variation_id = str(variation_id)
         if variation_id in self.product:  #[variation_id]:  ou seja se o produto existe na session:
             self.product[variation_id]['quantity'] = int(quantity)
